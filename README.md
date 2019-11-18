@@ -10,7 +10,7 @@
 - 지원정보
 - 설치하기
 - 설정하기
-  - [IOS 설정하기](manuals/SETTING.md)
+  - [IOS 설정하기](manuals/SETTING_IOS.md)
   - [안드로이드 설정하기](manuals/SETTING_ANDROID.md)
 - 예제 코드
 - 예제 프로젝트
