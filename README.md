@@ -33,7 +33,7 @@
 아래 명령어를 통해 아임포트 캐패시터 모듈을 귀하의 캐패시터 프로젝트에 추가할 수 있습니다.
 
 ```
-$ npm install iamport-react-native --save
+$ npm install iamport-capacitor --save
 ```
 
 ## 설정하기
