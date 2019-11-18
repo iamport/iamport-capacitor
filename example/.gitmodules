@@ -1,0 +1,3 @@
+[submodule "iamport-capacitor"]
+	path = iamport-capacitor
+	url = https://github.com/iamport/iamport-capacitor

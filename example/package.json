@@ -1,0 +1,64 @@
+{
+  "name": "example",
+  "version": "0.9.0",
+  "private": true,
+  "dependencies": {
+    "@capacitor/core": "1.3.0",
+    "@ionic/react": "^4.11.0",
+    "@ionic/react-router": "^4.11.0",
+    "@types/jest": "^24.0.18",
+    "@types/node": "^12.7.12",
+    "@types/react": "^16.9.5",
+    "@types/react-dom": "^16.9.1",
+    "@types/react-router": "^5.1.1",
+    "@types/react-router-dom": "^5.1.0",
+    "@types/styled-components": "^4.4.0",
+    "antd": "^3.25.1",
+    "babel-plugin-import": "^1.12.2",
+    "customize-cra": "^0.9.1",
+    "iamport-capacitor": "file:..",
+    "ionicons": "^4.6.3",
+    "less": "^3.10.3",
+    "less-loader": "^5.0.0",
+    "react": "^16.10.2",
+    "react-app-rewired": "^2.1.5",
+    "react-dom": "^16.10.2",
+    "react-router": "^5.1.0",
+    "react-router-dom": "^5.1.0",
+    "react-scripts": "3.2.0",
+    "styled-components": "^4.4.1",
+    "typescript": "3.6.3"
+  },
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-app-rewired eject",
+    "sync": "cd ../ && npm run build && cd ./example && ionic serve --devapp",
+    "device": "cd ../ && npm run build && cd ./example && npm run build && npx cap copy"
+  },
+  "author": {
+    "name": "Soree Choi",
+    "email": "mymusese@gmail.com",
+    "url": "https://github.com/SoleeChoi"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@capacitor/cli": "1.3.0"
+  },
+  "description": "An Ionic project"
+}
