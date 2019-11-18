@@ -16,7 +16,7 @@
 - 예제 프로젝트
 
 ## 버전정보
-최신버전은 [v0.9.0](https://github.com/iamport/iamport-react-native/tree/master)입니다. 버전 히스토리는 [버전정보](manuals/VERSION.md)를 참고하세요.
+최신버전은 [v0.9.0](https://github.com/iamport/iamport-capacitor/tree/master)입니다. 버전 히스토리는 [버전정보](manuals/VERSION.md)를 참고하세요.
 
 ## 지원정보
 
@@ -56,7 +56,7 @@ iamport-capacitor 모듈을 clone받아 폴더 위치를 `example` 프로젝트�
 
 ```
 $ git clone https://github.com/iamport/iamport-capacitor.git
-$ cd ./iamport-react-native/example
+$ cd ./iamport-capacitor/example
 ```
 
 필요한 npm 모듈을 설치합니다.
