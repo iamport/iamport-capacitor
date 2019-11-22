@@ -78,7 +78,7 @@ export function getMethods(pg: Pg): Array<eachMethod> {
   }
 }
 
-export function getUserCode(pg: string): string {
+export function getUserCode(pg: Pg): string {
   switch(pg) {
     case 'kakao':
       return 'imp10391932';

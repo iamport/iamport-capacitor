@@ -1,36 +1,43 @@
 import { IonContent, IonPage } from '@ionic/react';
 import React from 'react';
 import styled from 'styled-components';
-import { Icon, Button } from 'antd';
-
-import Header from '../components/Header';
+import { Icon } from 'antd';
+import { Link } from 'react-router-dom';
 
 const Result: React.FC = ({ history }: any) => {
   const { location } = history;
   const { state } = location;
   const { response } = state;
+  
   if (response) {
     const { type, error_code, error_msg, merchant_uid, imp_uid, success, imp_success } = response;
     const title = type === 'certification' ? '본인인증' : '결제';
     const isSuccess = Object.keys(response).indexOf('imp_success') === -1 ? success === 'true' : imp_success === 'true';
+    const color = isSuccess ? '#52c41a' : '#f5222d';
 
     return (
       <IonPage>
-        <Header title={`${title} 결과`} />
         <IonContent className="ion-padding">
-          <ResultContainer>
+          <ResultContainer color={color}>
             <Icon
               type={isSuccess ? 'check-circle' : 'exclamation-circle'}
-              style={{
-                fontSize: 100,
-                marginBottom: 30,
-                color: isSuccess ? '#52c41a' : '#f5222d',
-              }}
+              style={{ color, fontSize: 100, marginBottom: 30 }}
             />
             <h3><b>{`${title}에 ${isSuccess ? '성공' : '실패'}하였습니다`}</b></h3>
             <table>
               <tbody>
-                {!isSuccess && (
+                {isSuccess ? (
+                  <>
+                    <tr>
+                      <td>주문번호</td>
+                      <td>{merchant_uid}</td>
+                    </tr>
+                    <tr>
+                      <td>아임포트 번호</td>
+                      <td>{imp_uid}</td>
+                    </tr>
+                  </>
+                ) : (
                   <>
                     <tr>
                       <td>에러 코드</td>
@@ -42,27 +49,12 @@ const Result: React.FC = ({ history }: any) => {
                     </tr>
                   </>
                 )}
-                <tr>
-                  <td>주문번호</td>
-                  <td>{merchant_uid}</td>
-                </tr>
-                <tr>
-                  <td>아임포트 번호</td>
-                  <td>{imp_uid}</td>
-                </tr>
               </tbody>
             </table>
-            <Button
-              ghost
-              size="large"
-              type="danger"
-              icon="swap-left"
-              onClick={(e: any) => {
-                e.preventDefault();
-                history.push(`/`);
-              }}>
-                돌아가기
-              </Button>
+            <Link to="/">
+              <Icon type="swap-left" />
+              돌아가기
+            </Link>
           </ResultContainer>      
         </IonContent>
       </IonPage>
@@ -99,6 +91,17 @@ const ResultContainer = styled.div`
           vertical-align: top;
         }
       }
+    }
+  }
+
+  a {
+    border-radius: 3px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: 1px solid ${props => props.color};
+    color: ${props => props.color};
+    i.anticon {
+      margin-right: 0.5rem;
     }
   }
 `;

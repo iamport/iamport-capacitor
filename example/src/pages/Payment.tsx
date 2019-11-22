@@ -16,9 +16,9 @@ const  { Item } = Form;
 const initialPg: Pg = 'html5_inicis';
 const initialMethod: PayMethod = 'card';
 const initialQuota = 0;
-const initialMerchantUid = `mid_${new Date().getTime()}`;
 
 const Payment: React.FC = ({ history, form }: any) => {
+	const initialMerchantUid = `mid_${new Date().getTime()}`;
 	const { getFieldDecorator, validateFieldsAndScroll } = form;
 
 	const [pg, setPg] = useState<Pg>(initialPg);
