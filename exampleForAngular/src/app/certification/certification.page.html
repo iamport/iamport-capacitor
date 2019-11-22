@@ -1,0 +1,60 @@
+<app-header [title]="title"></app-header>
+
+<ion-content>
+  <div class="form-container">
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>주문번호</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzErrorTip="주문번호는 필수입력입니다.">
+          <input formControlName="merchant_uid" nz-input nzSize="large" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">회사명</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <input formControlName="company" nz-input nzSize="large" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">통신사</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <nz-select
+            nzSize="large"
+            formControlName="carrier"
+            [(ngModel)]="carrier"
+            (ngModelChange)="onChangeCarrier($event)"
+          >
+            <nz-option
+              *ngFor="let each of carriers"
+              [nzValue]="each.value"
+              [nzLabel]="each.label"
+            ></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">이름</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <input formControlName="name" nz-input nzSize="large" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">전화번호</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <input formControlName="phone" nz-input type="number" nzSize="large" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">허용최소연령</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <input formControlName="min_age" nz-input type="number" nzSize="large" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <button nz-button nzType="primary" nzSize="large">본인인증 하기</button>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </div>
+</ion-content>

@@ -1,0 +1,115 @@
+<app-header [title]="title"></app-header>
+
+<ion-content>
+  <div class="form-container">
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">PG사</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <nz-select
+            nzSize="large"
+            formControlName="pg"
+            [(ngModel)]="pg"
+            (ngModelChange)="onChangePg($event)"
+          >
+            <nz-option
+              *ngFor="let each of pgs"
+              [nzValue]="each.value"
+              [nzLabel]="each.label"
+            ></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">결제수단</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <nz-select
+            nzSize="large"
+            formControlName="method"
+            [(ngModel)]="method"
+            (ngModelChange)="onChangeMethod($event)"
+          >
+            <nz-option
+              *ngFor="let each of methods"
+              [nzValue]="each.value"
+              [nzLabel]="each.label"
+            ></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item *ngIf="method === 'card'">
+        <nz-form-label [nzSpan]="7">할부개월수</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <nz-select formControlName="quota" [(ngModel)]="quota" nzSize="large">
+            <nz-option nzValue="0" nzLabel="PG사 기본설정"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item *ngIf="method === 'vbank'">
+        <nz-form-label [nzSpan]="7">입금기한</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <input formControlName="vbank_due" nz-input nzSize="large" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item *ngIf="method === 'vbank' && pg === 'danal_tpay'">
+        <nz-form-label [nzSpan]="7">사업자번호</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <input formControlName="biz_num" nz-input type="number" nzSize="large" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item *ngIf="method === 'phone'">
+        <nz-form-label [nzSpan]="7">실물컨텐츠</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <nz-switch formControlName="digital"></nz-switch>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">에스크로</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <nz-switch formControlName="escrow"></nz-switch>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>주문명</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzErrorTip="주문명은 필수입력입니다.">
+          <input formControlName="name" nz-input nzSize="large" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>결제금액</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzErrorTip="결제금액은 필수입력입니다.">
+          <input formControlName="amount" nz-input type="number" nzSize="large" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>주문번호</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzErrorTip="주문번호는 필수입력입니다.">
+          <input formControlName="merchant_uid" nz-input nzSize="large" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">이름</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <input formControlName="buyer_name" nz-input nzSize="large" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">전화번호</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <input formControlName="buyer_tel" nz-input type="number" nzSize="large" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7">이메일</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <input formControlName="buyer_email" nz-input nzSize="large" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <button nz-button nzType="primary" nzSize="large">결제하기</button>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </div>
+</ion-content>
