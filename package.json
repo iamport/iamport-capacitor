@@ -34,7 +34,11 @@
   "keywords": [
     "capacitor",
     "plugin",
-    "native"
+    "native",
+    "ionic",
+    "iamport",
+    "payment",
+    "certification"
   ],
   "capacitor": {
     "ios": {
@@ -46,9 +50,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/SoleeChoi/iamport-capacitor"
+    "url": "https://github.com/iamport/iamport-capacitor"
   },
   "bugs": {
-    "url": "https://github.com/SoleeChoi/iamport-capacitor/issues"
+    "url": "https://github.com/iamport/iamport-capacitor/issues"
   }
 }
