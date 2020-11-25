@@ -1,5 +1,6 @@
 package kr.iamport.capacitor;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -42,6 +43,9 @@ public class IamportCapacitor extends Plugin {
         super.handleOnActivityResult(requestCode, resultCode, data);
 
         if (requestCode == REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_CANCELED) {
+                return;
+            }
             Bundle extras = data.getExtras();
             String url = extras.getString("url");
 

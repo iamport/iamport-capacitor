@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
@@ -68,5 +69,17 @@ public class IamportActivity extends Activity {
         if (requestCode == IamportCapacitor.REQUEST_CODE_FOR_NICE_TRANS) {
             webViewClient.bankPayPostProcess(requestCode, resultCode, data);
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            Intent intent = new Intent();
+            intent.putExtra("error", "user cancelled");
+            this.setResult(Activity.RESULT_CANCELED, intent);
+            this.finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
