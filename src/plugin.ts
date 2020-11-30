@@ -22,7 +22,7 @@ export class IMP implements IamportCapacitorPlugin {
       location.href = 'http://localhost/iamport?' + query.join('&');
     }`;         
 
-  addListener(callback: any, type?: String) {
+  addListener(callback: any, callbackOnBack: any, type?: String) {
     IamportCapacitor.addListener('IMPOver', async ({ url }: any) => {
 
       if (!this.isCallbackCalled) { // 콜백 중복 호출 방지
@@ -48,10 +48,16 @@ export class IMP implements IamportCapacitorPlugin {
         this.isCallbackCalled = true;
       }
     });
+
+    IamportCapacitor.addListener('IMPBack', async () => {
+      if (callbackOnBack) {
+        callbackOnBack();
+      }
+    });
   }
 
   payment(options: PaymentOptions): Promise<PaymentOptions> {
-    const { userCode, data, callback } = options;
+    const { userCode, data, callback, callbackOnBack } = options;
     const type = this.getPaymentType(data);
     const newOptions = {
       type,
@@ -63,7 +69,7 @@ export class IMP implements IamportCapacitorPlugin {
       triggerCallback: this.triggerCallback,
       redirectUrl: REDIRECT_URL,
     };
-    this.addListener(callback, type);
+    this.addListener(callback, callbackOnBack, type);
     return IamportCapacitor.startIamportActivity(newOptions);
   }
 
@@ -82,7 +88,7 @@ export class IMP implements IamportCapacitorPlugin {
   }
 
   certification(options: CertificationOptions): Promise<CertificationOptions> {
-    const { userCode, data, callback } = options;
+    const { userCode, data, callback, callbackOnBack } = options;
     const newOptions = {
       type: 'certification',
       userCode,
@@ -90,7 +96,7 @@ export class IMP implements IamportCapacitorPlugin {
       triggerCallback: this.triggerCallback,
       redirectUrl: REDIRECT_URL,
     };
-    this.addListener(callback);
+    this.addListener(callback, callbackOnBack);
 
     return IamportCapacitor.startIamportActivity(newOptions);
   }

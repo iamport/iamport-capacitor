@@ -43,6 +43,7 @@ export interface PaymentOptions {
   userCode: string,
   data: PaymentData,
   callback: (response: Response) => void,
+  callbackOnBack?: () => void,
 };
 
 export type Carrier = 'SKT' | 'KTF' | 'LGT' | 'MVNO';
@@ -60,6 +61,7 @@ export interface CertificationOptions {
   userCode: string,
   data: CertificationData,
   callback: (response: Response) => void,
+  callbackOnBack?: () => void,
 };
 
 export interface Response {

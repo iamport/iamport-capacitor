@@ -27,6 +27,7 @@ public class IamportActivity extends Activity {
         WebSettings settings = webview.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setDomStorageEnabled(true);
+        settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
 
         webview.loadUrl(IamportCapacitor.WEBVIEW_PATH);
         webview.setWebChromeClient(new IamportWebChromeClient());
@@ -67,6 +68,19 @@ public class IamportActivity extends Activity {
 
         if (requestCode == IamportCapacitor.REQUEST_CODE_FOR_NICE_TRANS) {
             webViewClient.bankPayPostProcess(requestCode, resultCode, data);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        // 뒤로가기 버튼 눌렀을때
+        if (webview.canGoBack()) {
+            // 뒤로 갈 수 있으면, 뒤로 보낸다
+            webview.goBack();
+        } else {
+            // 뒤로 갈 수 없는 경우, 액티비티를 종료한다
+            setResult(IamportCapacitor.RESULT_CODE_FOR_BACK, null);
+            finish();
         }
     }
 }
