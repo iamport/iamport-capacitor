@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
-import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
@@ -52,30 +50,6 @@ public class IamportActivity extends Activity {
             }
         }
         webview.setWebViewClient(webViewClient);
-
-        webview.setOnKeyListener(new View.OnKeyListener() {
-          @Override
-          public boolean onKey(View v, int keyCode, KeyEvent event) {
-              if (event.getAction() == KeyEvent.ACTION_DOWN) {
-                  switch (keyCode) {
-                      case KeyEvent.KEYCODE_BACK:
-                          // 뒤로가기 버튼 눌렀을때
-                          if (webview.canGoBack()) {
-                              // 뒤로 갈 수 있으면, 뒤로 보낸다
-                              webview.goBack();
-                          } else {
-                              // 뒤로 갈 수 없는 경우, 액티비티를 종료한다
-                              Intent data = new Intent();
-                              data.putExtra("url", webview.getUrl());
-                              setResult(IamportCapacitor.REQUEST_CODE, data);
-                              finish();
-                          }
-                          return true;
-                  }
-              }
-              return false;
-          }
-      });
     }
 
     @Override
@@ -94,6 +68,19 @@ public class IamportActivity extends Activity {
 
         if (requestCode == IamportCapacitor.REQUEST_CODE_FOR_NICE_TRANS) {
             webViewClient.bankPayPostProcess(requestCode, resultCode, data);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        // 뒤로가기 버튼 눌렀을때
+        if (webview.canGoBack()) {
+            // 뒤로 갈 수 있으면, 뒤로 보낸다
+            webview.goBack();
+        } else {
+            // 뒤로 갈 수 없는 경우, 액티비티를 종료한다
+            setResult(IamportCapacitor.RESULT_CODE_FOR_BACK, null);
+            finish();
         }
     }
 }

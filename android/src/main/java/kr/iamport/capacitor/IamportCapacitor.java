@@ -19,6 +19,7 @@ public class IamportCapacitor extends Plugin {
 
     static final int REQUEST_CODE = 6018;
     static final int REQUEST_CODE_FOR_NICE_TRANS = 4117;
+    static final int RESULT_CODE_FOR_BACK = 4783;
     static final String WEBVIEW_PATH = "file:///android_asset/html/webview_source.html";
 
     @PluginMethod()
@@ -42,12 +43,18 @@ public class IamportCapacitor extends Plugin {
         super.handleOnActivityResult(requestCode, resultCode, data);
 
         if (requestCode == REQUEST_CODE) {
-            Bundle extras = data.getExtras();
-            String url = extras.getString("url");
+          if (resultCode == RESULT_CODE_FOR_BACK) {
+              // 뒤로가기 버튼 눌렀을때
+              notifyListeners("IMPBack", null);
+          } else {
+              // 정상적으로 결제 프로세스 종료됐을때
+              Bundle extras = data.getExtras();
+              String url = extras.getString("url");
 
-            JSObject ret = new JSObject();
-            ret.put("url", url);
-            notifyListeners("IMPOver", ret);
-        }
+              JSObject ret = new JSObject();
+              ret.put("url", url);
+              notifyListeners("IMPOver", ret);
+          }
+      }
     }
 }
