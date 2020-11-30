@@ -26,6 +26,10 @@ const Certification: React.FC = ({ history, form }: any) => {
     history.replace('/result', { response: newResponse });
   }
 
+  function callbackOnBack() {
+    history.replace('/');
+  }
+
   function handleSubmit(e: any) {
     e.preventDefault();
 
@@ -58,6 +62,7 @@ const Certification: React.FC = ({ history, form }: any) => {
           userCode,
           data,
           callback,
+          callbackOnBack,
         };
 
         imp.certification(options);
