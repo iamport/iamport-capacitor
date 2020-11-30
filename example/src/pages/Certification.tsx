@@ -23,7 +23,7 @@ const Certification: React.FC = ({ history, form }: any) => {
       type: 'certification',
     };
 
-    history.push('/result', { response: newResponse });
+    history.replace('/result', { response: newResponse });
   }
 
   function handleSubmit(e: any) {

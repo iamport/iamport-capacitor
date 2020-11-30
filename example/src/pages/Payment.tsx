@@ -31,7 +31,7 @@ const Payment: React.FC = ({ history, form }: any) => {
 			type: 'payment',
 		};
 
-		history.push('/result', { response: newResponse });
+		history.replace('/result', { response: newResponse });
 	}
 	
 	function handleSubmit(e: any) {
