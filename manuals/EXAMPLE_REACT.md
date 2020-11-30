@@ -15,6 +15,11 @@ const Payment: React.FC = () => {
     alert(`아임포트 번호: ${imp_uid}, 주문번호: ${merchant_uid}`);
   }
 
+  /* [안드로이드 전용 / 선택입력] 뒤로가기로 결제창 벗어났을때 로직을 작성합니다. */
+  function callbackOnBack() {
+    alert('결제를 중단하셨습니다.');
+  }
+
   function onClickPayment() {
     const imp = new IMP();
 
@@ -42,6 +47,7 @@ const Payment: React.FC = () => {
       userCode,
       data,
       callback,
+      callbackOnBack,
     };
     imp.payment(options);
   }
@@ -66,6 +72,11 @@ const Certification: React.FC = () => {
     alert(`아임포트 번호: ${imp_uid}, 주문번호: ${merchant_uid}`);
   }
 
+  /* [안드로이드 전용 / 선택입력] 뒤로가기로 본인인증창을 벗어났을때 로직을 작성합니다. */
+  function callbackOnBack() {
+    alert('본인인증을 중단하셨습니다.');
+  }
+
   function onClickPayment() {
     const imp = new IMP();
 
@@ -86,6 +97,7 @@ const Certification: React.FC = () => {
       userCode,
       data,
       callback,
+      callbackOnBack,
     };
     imp.certification(options);
   }

@@ -53,7 +53,8 @@ export class PaymentPage {
     const options: PaymentOptions = {
       userCode,
       data,
-      callback,
+      callback: this.callback,
+      callbackOnBack: this.callbackOnBack,
     };
     imp.payment(options);
   }
@@ -63,6 +64,11 @@ export class PaymentPage {
       // 결과 페이지로 이동
       this.router.navigate(['/result', response])
     );
+  }
+
+  /* [안드로이드 전용 / 선택입력] 뒤로가기로 결제창 벗어났을때 로직을 작성합니다. */
+  callbackOnBack = () => {
+    alert('결제를 중단하셨습니다.');
   }
 }
 ```
@@ -113,6 +119,7 @@ export class CertificationPage implements OnInit {
       userCode,
       data,
       callback: this.callback,
+      callbackOnBack: this.callbackOnBack,
     };
 
     imp.certification(options);
@@ -123,6 +130,11 @@ export class CertificationPage implements OnInit {
       // 결과 페이지로 이동
       this.router.navigate(['/result', response])
     );
+  }
+
+  /* [안드로이드 전용 / 선택입력] 뒤로가기로 본인인증창 벗어났을때 로직을 작성합니다. */
+  callbackOnBack = () => {
+    alert('본인인증을 중단하셨습니다.');
   }
 }
 ```
