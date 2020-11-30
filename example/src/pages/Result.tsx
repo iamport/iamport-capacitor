@@ -51,7 +51,7 @@ const Result: React.FC = ({ history }: any) => {
                 )}
               </tbody>
             </table>
-            <Link to="/">
+            <Link to={`/${type}`}>
               <Icon type="swap-left" />
               돌아가기
             </Link>

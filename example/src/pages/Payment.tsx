@@ -31,8 +31,12 @@ const Payment: React.FC = ({ history, form }: any) => {
 			type: 'payment',
 		};
 
-		history.push('/result', { response: newResponse });
-	}
+		history.replace('/result', { response: newResponse });
+  }
+  
+  function callbackOnBack() {
+    history.replace('/');
+  }
 	
 	function handleSubmit(e: any) {
 		e.preventDefault();
@@ -96,7 +100,8 @@ const Payment: React.FC = ({ history, form }: any) => {
 				const options: PaymentOptions = {
 					userCode,
 					data,
-					callback,
+          callback,
+          callbackOnBack,
 				};
 				imp.payment(options);
 			}
