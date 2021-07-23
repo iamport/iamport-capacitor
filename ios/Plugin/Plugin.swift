@@ -26,7 +26,7 @@ public class IamportCapacitor: CAPPlugin, IamportDelegate {
             }
 
             self.iamportViewController?.delegate = self;
-            self.bridge.viewController.present(self.iamportViewController!, animated: true, completion: nil)
+            self.bridge?.viewController?.present(self.iamportViewController!, animated: true, completion: nil)
         }
     }
     
