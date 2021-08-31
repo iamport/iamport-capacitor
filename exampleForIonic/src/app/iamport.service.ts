@@ -199,7 +199,6 @@ export class IamportService {
       redirectUrl: this.REDIRECT_URL_WEB,
     };
     // this.addListener(callback, callbackOnBack);
-
     return IamportCapacitor.startIamportActivity(newOptions);
   }
 
@@ -214,6 +213,7 @@ export class IamportService {
     };
     // this.addListener(callback, callbackOnBack);
 
+    //add callback listenr
     return IamportCapacitor.startIamportActivity(newOptions);
   }
 }

@@ -139,6 +139,7 @@ export class PaymentPage implements OnInit {
         .then((result: any) => {
           console.log('result', result);
           alert('success:' + JSON.stringify(result));
+          this.callback(result);
         })
         .catch(error => {
           console.log('error', error);

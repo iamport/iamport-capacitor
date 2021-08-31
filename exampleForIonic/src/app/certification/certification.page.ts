@@ -81,7 +81,14 @@ export class CertificationPage implements OnInit {
       //   callback: this.callback,
       // };
 
-      this.iamport.certification(userCode, data);
+      this.iamport
+        .certification(userCode, data)
+        .then((result: any) => {
+          this.callback(result);
+        })
+        .catch(error => {
+          alert(JSON.stringify(error));
+        });
     }
   }
 
