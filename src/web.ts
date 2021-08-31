@@ -1,26 +1,13 @@
 import { WebPlugin } from '@capacitor/core';
-import { IamportCapacitorPlugin, PaymentOptions, CertificationOptions } from './definitions';
 
-export class IamportCapacitorWeb extends WebPlugin implements IamportCapacitorPlugin {
-  constructor() {
-    super({
-      name: 'IamportCapacitor',
-      platforms: ['web']
+import type { IamportCapacitorPlugin } from './definitions';
+
+export class IamportCapacitorWeb
+  extends WebPlugin
+  implements IamportCapacitorPlugin {
+  startIamportActivity(options: any): Promise<any> {
+    return new Promise(resolve => {
+      resolve(options);
     });
   }
-
-  async payment(options: PaymentOptions): Promise<PaymentOptions> {
-    return options;
-  }
-
-  async certification(options: CertificationOptions): Promise<CertificationOptions> {
-    return options;
-  }
 }
-
-const IamportCapacitor = new IamportCapacitorWeb();
-
-export { IamportCapacitor };
-
-import { registerWebPlugin } from '@capacitor/core';
-registerWebPlugin(IamportCapacitor);
