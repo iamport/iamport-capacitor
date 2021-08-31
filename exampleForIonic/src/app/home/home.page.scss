@@ -1,0 +1,55 @@
+.home-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  a {
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #333;
+    text-decoration: none;
+    text-align: center;
+    background-color: #fff;
+    width: 130px;
+    height: 100px;
+    border-radius: 3px;
+    margin: 0 0.5rem;
+    .anticon {
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+}
+
+.blue-box {
+  position: absolute;
+  z-index: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 50%;
+  background-color: #344e81;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  * {
+    color: #fff;
+  }
+
+  p {
+    margin: 0;
+    line-height: 1.5;
+    font-size: 0.8rem;
+  }
+}

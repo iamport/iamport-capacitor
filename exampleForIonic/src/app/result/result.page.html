@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>결과</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="isSuccess; then thenBlock else elseBlock"></div>
+  <!-- 성공 -->
+  <ng-template #thenBlock>
+    <div class="result-container success">
+      <i nz-icon nzType="check-circle"></i>
+      <h3><b>{{ typeToText }}에 성공하였습니다</b></h3>
+      <table>
+        <tbody>
+          <tr>
+            <td>주문번호</td>
+            <td>{{ merchant_uid }}</td>
+          </tr>
+          <tr>
+            <td>아임포트 번호</td>
+            <td>{{ imp_uid }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <a routerLink="/{{ type }}">
+        <i nz-icon nzType="swap-left"></i>
+        돌아가기
+      </a>
+    </div>
+  </ng-template>
+  <!-- 실패 -->
+  <ng-template #elseBlock>
+    <div class="result-container failure">
+      <i nz-icon nzType="exclamation-circle"></i>
+      <h3><b>{{ typeToText }}에 실패하였습니다</b></h3>
+      <table>
+        <tbody>
+          <tr>
+            <td>에러 코드</td>
+            <td>{{ error_code }}</td>
+          </tr>
+          <tr>
+            <td>에러 메시지</td>
+            <td>{{ error_msg }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <a routerLink="/{{ type }}">
+        <i nz-icon nzType="swap-left"></i>
+        돌아가기
+      </a>
+    </div>
+  </ng-template>
+</ion-content>
