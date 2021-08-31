@@ -22,7 +22,7 @@ export class IamportService {
   private isCallbackCalled: boolean = false;
 
   //web redirect url
-  private REDIRECT_URL_WEB = `http://localhost:8100/redirect_url?platform=web&`;
+  private REDIRECT_URL_WEB = `http://localhost:8100/result`;
 
   //android, ios redirect url
   private REDIRECT_URL_APP = 'http://localhost/iamport';
@@ -113,19 +113,70 @@ export class IamportService {
   }
 
   paymentApp(userCode: string, param: PaymentData) {
-    return new Promise((resolve, reject) => {
-      this.type = this.getPaymentType(param);
-      const newOptions = {
-        type: this.type,
-        userCode,
-        data: {
-          ...param,
-          m_redirect_url: this.REDIRECT_URL_APP,
-        },
-        triggerCallback: this.triggerCallback,
-        redirectUrl: this.REDIRECT_URL_APP,
-      };
+    this.type = this.getPaymentType(param);
+    const newOptions = {
+      type: this.type,
+      userCode,
+      data: {
+        ...param,
+        m_redirect_url: this.REDIRECT_URL_APP,
+      },
+      triggerCallback: this.triggerCallback,
+      redirectUrl: this.REDIRECT_URL_APP,
+    };
+    return this.callStartIamportActivity(newOptions);
+  }
 
+  /**
+   * 인증 요청 함수
+   * @param userCode
+   * @param data
+   * @returns
+   */
+  certification(userCode: string, data: CertificationData): Promise<any> {
+    this.isCallbackCalled = false;
+    if (Capacitor.getPlatform() == 'web') {
+      return this.certificationWeb(userCode, data);
+    } else {
+      return this.certificationApp(userCode, data);
+    }
+  }
+
+  certificationWeb(userCode: string, data: CertificationData): Promise<any> {
+    return new Promise((resolve, reject) => {
+      IMP.init(userCode);
+      data['m_redirect_url'] = this.REDIRECT_URL_WEB;
+      IMP.certification(data, async rsp => {
+        if (
+          rsp.success == true ||
+          rsp.success == 'true' ||
+          rsp.imp_success == true
+        ) {
+          resolve({
+            imp_uid: rsp.imp_uid,
+            merchant_uid: rsp.merchant_uid,
+          });
+        } else {
+          reject(rsp);
+        }
+      });
+    });
+  }
+
+  certificationApp(userCode: string, data: CertificationData): Promise<any> {
+    const newOptions = {
+      type: 'certification',
+      userCode,
+      data,
+      triggerCallback: this.triggerCallback,
+      redirectUrl: this.REDIRECT_URL_APP,
+    };
+    return this.callStartIamportActivity(newOptions);
+  }
+
+  //IamportActiviy 호출하는 부분
+  callStartIamportActivity(options: any) {
+    return new Promise((resolve, reject) => {
       IamportCapacitor.addListener('IMPOver', async (data: any) => {
         if (!this.isCallbackCalled) {
           this.isCallbackCalled = true;
@@ -176,44 +227,7 @@ export class IamportService {
           });
         }
       });
-      IamportCapacitor.startIamportActivity(newOptions);
+      IamportCapacitor.startIamportActivity(options);
     });
-  }
-
-  certification(userCode: string, data: CertificationData): Promise<any> {
-    this.isCallbackCalled = false;
-    if (Capacitor.getPlatform() == 'web') {
-      return this.certificationWeb(userCode, data);
-    } else {
-      return this.certificationApp(userCode, data);
-    }
-  }
-
-  certificationWeb(userCode: string, data: CertificationData): Promise<any> {
-    // const { data, callback, callbackOnBack } = options;
-    const newOptions = {
-      type: 'certification',
-      userCode,
-      data,
-      triggerCallback: this.triggerCallback,
-      redirectUrl: this.REDIRECT_URL_WEB,
-    };
-    // this.addListener(callback, callbackOnBack);
-    return IamportCapacitor.startIamportActivity(newOptions);
-  }
-
-  certificationApp(userCode: string, data: CertificationData): Promise<any> {
-    // const { data, callback, callbackOnBack } = options;
-    const newOptions = {
-      type: 'certification',
-      userCode,
-      data,
-      triggerCallback: this.triggerCallback,
-      redirectUrl: this.REDIRECT_URL_APP,
-    };
-    // this.addListener(callback, callbackOnBack);
-
-    //add callback listenr
-    return IamportCapacitor.startIamportActivity(newOptions);
   }
 }

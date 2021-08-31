@@ -24,7 +24,7 @@ export class CertificationPage implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.carrier = 'KTF';
+    this.carrier = 'SKT';
     this.initializeValidateForm();
   }
 
