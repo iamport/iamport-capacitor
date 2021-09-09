@@ -10,4 +10,5 @@ const IamportCapacitor = registerPlugin<IamportCapacitorPlugin>(
 );
 
 export * from './definitions';
+export * from './plugin';
 export { IamportCapacitor };
