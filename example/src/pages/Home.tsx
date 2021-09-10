@@ -2,7 +2,7 @@ import { IonContent, IonPage } from '@ionic/react';
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { Icon } from 'antd';
+import { CreditCardOutlined, UserOutlined } from '@ant-design/icons';
 
 const Home: React.FC = () => {
   return (
@@ -15,11 +15,11 @@ const Home: React.FC = () => {
             <p>아래 버튼을 눌러 결제 또는 본인인증 테스트를 진행해주세요.</p>
           </BlueBox>
           <Link to="/payment">
-            <Icon type="credit-card" />
+            <CreditCardOutlined />
             결제하기
           </Link>
           <Link to="/certification">
-            <Icon type="user" />
+            <UserOutlined />
             본인인증 하기
           </Link>
         </HomeContainer>

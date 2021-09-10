@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { Form } from 'antd';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
 
 const FormContainer = styled(Form)`
   border-radius: 3px;
@@ -8,18 +9,18 @@ const FormContainer = styled(Form)`
     padding: 1.5rem;
   }
 
-  .ant-row.ant-form-item {
+  .ant-row.ant-legacy-form-item {
     display: flex;
     align-items: center;
     margin-bottom: 0.5rem;
-    .ant-col.ant-form-item-label {
+    .ant-col.ant-legacy-form-item-label {
       flex: 3;
       label {
         color: #888;
         font-size: 0.8rem;
       }
     }
-    .ant-col.ant-form-item-control-wrapper {
+    .ant-col.ant-legacy-form-item-control-wrapper {
       flex: 7;
     }
   }

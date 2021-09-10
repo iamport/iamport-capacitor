@@ -1,16 +1,32 @@
 import { IonContent, IonPage } from '@ionic/react';
 import React from 'react';
 import styled from 'styled-components';
-import { Icon } from 'antd';
+import { Icon as LegacyIcon } from '@ant-design/compatible';
+import { SwapLeftOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 
 const Result: React.FC = ({ history }: any) => {
-  const { location } = history;
-  const { state } = location;
-  const { response } = state;
+
+	console.log("헬로헬로 Result gggg")
+	console.log(history.location)
+
+  // const { location } = history;
+  // const { state } = location;
+  // const { response } = state;
+  const response1 = history.location.state;
   
-  if (response) {
+  if (response1) {
+
+    console.log("response 가 있어")
+    console.log(history.location.state)
+
+    const { location } = history;
+    const { state } = location;
+    const { response } = state;
+
     const { type, error_code, error_msg, merchant_uid, imp_uid, success, imp_success } = response;
+
+    console.log(error_msg)
     const title = type === 'certification' ? '본인인증' : '결제';
     const isSuccess = Object.keys(response).indexOf('imp_success') === -1 ? success === 'true' : imp_success === 'true';
     const color = isSuccess ? '#52c41a' : '#f5222d';
@@ -19,7 +35,7 @@ const Result: React.FC = ({ history }: any) => {
       <IonPage>
         <IonContent className="ion-padding">
           <ResultContainer color={color}>
-            <Icon
+            <LegacyIcon
               type={isSuccess ? 'check-circle' : 'exclamation-circle'}
               style={{ color, fontSize: 100, marginBottom: 30 }}
             />
@@ -51,8 +67,8 @@ const Result: React.FC = ({ history }: any) => {
                 )}
               </tbody>
             </table>
-            <Link to={`/${type}`}>
-              <Icon type="swap-left" />
+            <Link to={`/${type}`} replace>
+              <SwapLeftOutlined />
               돌아가기
             </Link>
           </ResultContainer>      
@@ -60,7 +76,12 @@ const Result: React.FC = ({ history }: any) => {
       </IonPage>
     );
   }
-  return <IonPage></IonPage>
+
+	console.log("끝까지 왔어 ㅋㅋ")
+	// console.log(history.location.pathname)
+  return <IonPage>
+  {/* <Link to={`/${history.location.pathname}`}/> */}
+  </IonPage>
 };
 
 const ResultContainer = styled.div`

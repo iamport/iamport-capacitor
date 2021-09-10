@@ -1,6 +1,8 @@
 import { IonContent, IonPage } from '@ionic/react';
 import React, { useState } from 'react';
-import { Form, Input, Button } from 'antd';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Input, Button } from 'antd';
 import { IMP, CertificationData, CertificationOptions, Response, Carrier } from 'iamport-capacitor';
 
 import Header from '../components/Header';

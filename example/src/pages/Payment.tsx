@@ -1,6 +1,8 @@
 import { IonContent, IonPage } from '@ionic/react';
 import React, { useState } from 'react';
-import { Form, Input, Button, Switch } from 'antd';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Input, Button, Switch } from 'antd';
 import { IMP, PaymentData, PaymentOptions, Response, Pg, PayMethod } from 'iamport-capacitor';
 
 import Header from '../components/Header';
@@ -18,6 +20,10 @@ const initialMethod: PayMethod = 'card';
 const initialQuota = 0;
 
 const Payment: React.FC = ({ history, form }: any) => {
+
+	console.log("헬로헬로 Payment")
+	console.log(history.location)
+
 	const initialMerchantUid = `mid_${new Date().getTime()}`;
 	const { getFieldDecorator, validateFieldsAndScroll } = form;
 
@@ -31,10 +37,14 @@ const Payment: React.FC = ({ history, form }: any) => {
 			type: 'payment',
 		};
 
+
+		console.log("콜백 다시 불리는거 아니지?")
 		history.replace('/result', { response: newResponse });
   }
   
   function callbackOnBack() {
+
+		console.log("callbackOnBack")
     history.replace('/');
   }
 	
@@ -119,6 +129,7 @@ const Payment: React.FC = ({ history, form }: any) => {
 							value={pg}
 							initialValue={initialPg}
 							onChange={(value: Pg) => {
+								console.log(value)
 								setPg(value);
 
 								const methods = getMethods(value);

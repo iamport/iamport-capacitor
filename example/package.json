@@ -3,11 +3,11 @@
   "version": "0.10.0",
   "private": true,
   "dependencies": {
-    "@capacitor/android": "3.2.2",
+    "@capacitor/android": "3.0.0",
     "@capacitor/app": "1.0.3",
-    "@capacitor/core": "3.2.2",
+    "@capacitor/core": "3.0.0",
     "@capacitor/haptics": "1.0.3",
-    "@capacitor/ios": "3.2.2",
+    "@capacitor/ios": "3.0.0",
     "@capacitor/keyboard": "1.0.3",
     "@capacitor/status-bar": "1.0.3",
     "@ionic/react": "^5.5.0",
@@ -24,7 +24,7 @@
     "@types/react-router-dom": "^5.1.7",
     "@types/styled-components": "^5.1.14",
     
-    "antd": "^4.16.13",
+    "antd": "^4.13.0",
     "@ant-design/icons": "^4.0.0",
     "@ant-design/compatible": "^1.0.0",
 
@@ -48,7 +48,7 @@
     "sync": "cd ../ && npm run build && cd ./example && ionic serve --devapp",
     "device": "cd ../ && npm run build && cd ./example && npm run build && npx cap copy",
     "ios": "cd ../ && npm run build && cd ./example && npm run build && npx cap run ios",
-    "android": "cd ../ && npm run build && cd ./example && npm run build && npx cap run ios"
+    "android": "cd ../ && npm run build && cd ./example && npm run build && npx cap run android"
   },
   "author": {
     "name": "Soree Choi",
@@ -71,7 +71,7 @@
     ]
   },
   "devDependencies": {
-    "@capacitor/cli": "^3.2.2"
+    "@capacitor/cli": "^3.2.0"
   },
   "description": "An Ionic project"
 }

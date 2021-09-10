@@ -1250,17 +1250,17 @@
   "resolved" "https://registry.npmjs.org/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz"
   "version" "0.2.3"
 
-"@capacitor/android@3.2.2":
-  "integrity" "sha512-+/qbSZIHPP1VndRUe5c6dgheLV0MgX9CXeUo7el8ODHgVrC2DXKhczgvs+EpTAmvS2VZFxzDeld7AMUmHybTcg=="
-  "resolved" "https://registry.npmjs.org/@capacitor/android/-/android-3.2.2.tgz"
-  "version" "3.2.2"
+"@capacitor/android@3.0.0":
+  "integrity" "sha512-qyvI3LzfGvVnSK7Dw3dXXLSJjfj816EfWHiyGzV4Rg5r2XkvPa8IqjHT3lmyxwNJjGdHl3TTn9Q6YvM6XD70cQ=="
+  "resolved" "https://registry.npmjs.org/@capacitor/android/-/android-3.0.0.tgz"
+  "version" "3.0.0"
 
 "@capacitor/app@1.0.3":
   "integrity" "sha512-kilAdWODV5p32wz0jVGdSoQTEx4Q0TM/xYj9w3iYYNI24v1WIRnEs04TaGTG8JFYIUksJaOqGC3PoZddfZ1POA=="
   "resolved" "https://registry.npmjs.org/@capacitor/app/-/app-1.0.3.tgz"
   "version" "1.0.3"
 
-"@capacitor/cli@^3.2.2":
+"@capacitor/cli@^3.2.0":
   "integrity" "sha512-/yradyGNGxO+Dj1ppzty3ReK+/Ukmnz0GdAE5nX3zySGSQg0ebZs81gKYDKJaXknQhx1ZZJGlT9D9ORiN3sbhw=="
   "resolved" "https://registry.npmjs.org/@capacitor/cli/-/cli-3.2.2.tgz"
   "version" "3.2.2"
@@ -1282,10 +1282,10 @@
     "tslib" "^2.1.0"
     "xml2js" "^0.4.23"
 
-"@capacitor/core@^3.0.0", "@capacitor/core@^3.2.0", "@capacitor/core@3.2.2":
-  "integrity" "sha512-xY3VyLbF0vSxQmQto6cI1PqP8idbwmfEAeaj248uuSrIYHeMc1L3RS6UN/yNBDPYPeAfNUwBhVqSTCtuZkEIcg=="
-  "resolved" "https://registry.npmjs.org/@capacitor/core/-/core-3.2.2.tgz"
-  "version" "3.2.2"
+"@capacitor/core@^3.0.0", "@capacitor/core@~3.0.0", "@capacitor/core@3.0.0":
+  "integrity" "sha512-JmKE6QEayo8MqWcApwMP5YFimpVb2mcIEHBwgP/P9nSAOxOcbdpJyd9HhBt5pzZAE1MBngPADWWwZLrdNSjCnA=="
+  "resolved" "https://registry.npmjs.org/@capacitor/core/-/core-3.0.0.tgz"
+  "version" "3.0.0"
   dependencies:
     "tslib" "^2.1.0"
 
@@ -1299,10 +1299,10 @@
   "resolved" "https://registry.npmjs.org/@capacitor/haptics/-/haptics-1.0.3.tgz"
   "version" "1.0.3"
 
-"@capacitor/ios@3.2.2":
-  "integrity" "sha512-Eq17Y+UDHFmYGaZcObvxHAcHw0fF9TCBAg1f5f6qdV8ab3cKKEUB9xMvoCSZAueBfxFARrD18TsZJKoxh2YsLA=="
-  "resolved" "https://registry.npmjs.org/@capacitor/ios/-/ios-3.2.2.tgz"
-  "version" "3.2.2"
+"@capacitor/ios@3.0.0":
+  "integrity" "sha512-EvWW86hQqmoY0qFV1LJyZujlgfEgl4iEUJVhCv84mshMyS2bXZu5Ip4yuKtJBDsKmTWyA7rfcAnPMEnUfQ6bkw=="
+  "resolved" "https://registry.npmjs.org/@capacitor/ios/-/ios-3.0.0.tgz"
+  "version" "3.0.0"
 
 "@capacitor/keyboard@1.0.3":
   "integrity" "sha512-s963GqVAvhdqxwtASjev/Az6gm164GbAxZGXP29VK8J+j363y++F9uDVUNfud9z7msdXaoV4btyk7cc7rmxydg=="
@@ -2717,7 +2717,7 @@
   "resolved" "https://registry.npmjs.org/ansi-styles/-/ansi-styles-5.2.0.tgz"
   "version" "5.2.0"
 
-"antd@^4.16.13", "antd@>=3.0.0":
+"antd@^4.13.0", "antd@>=3.0.0":
   "integrity" "sha512-EMPD3fzKe7oayx9keD/GA1oKatcx7j5CGlkJj5eLS0/eEDDEkxVj3DFmKOPuHYt4BK7ltTzMFS+quSTmqUXPiw=="
   "resolved" "https://registry.npmjs.org/antd/-/antd-4.16.13.tgz"
   "version" "4.16.13"
