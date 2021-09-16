@@ -1,4 +1,4 @@
-import { PluginListenerHandle } from '@capacitor/core';
+import type { PluginListenerHandle } from '@capacitor/core';
 
 export interface IamportCapacitorPlugin {
   startIamportActivity(options: any): Promise<any>;
@@ -66,7 +66,7 @@ export interface PaymentData {
   currency?: string;
   vbank_due?: string;
   display?: {
-    card_quota: Array<number>;
+    card_quota: number[];
   };
 }
 

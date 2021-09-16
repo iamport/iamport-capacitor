@@ -1,12 +1,11 @@
 import { Device } from '@capacitor/device';
 import queryString from 'query-string';
 
-import {
+import type {
   PaymentData,
   PaymentOptions,
   CertificationOptions,
 } from './definitions';
-
 import {
   IamportCapacitor
 } from './index'
@@ -14,8 +13,8 @@ import {
 const REDIRECT_URL = 'http://localhost/iamport';
 
 export class IMP {
-  private isCallbackCalled: boolean = false;       
-  private triggerCallback: string = `function(response) {
+  private isCallbackCalled = false;
+  private triggerCallback = `function(response) {
       const query = [];
       Object.keys(response).forEach(key => {
         query.push(key + '=' + response[key]);
@@ -24,7 +23,7 @@ export class IMP {
       location.href = 'http://localhost/iamport?' + query.join('&');
     }`;         
 
-  addListenerInner(callback: any, callbackOnBack: any, type?: String) {
+  addListenerInner(callback: any, callbackOnBack: any, type?: string) {
 
     IamportCapacitor.addListener('IMPOver', async ({ url }: any) => {
 
@@ -43,7 +42,7 @@ export class IMP {
             imp_uid,
             merchant_uid:
                 typeof merchant_uid === 'object'
-                  ? merchant_uid![0]
+                  ? merchant_uid?.[0]
                   : merchant_uid,
           };
           callback(query);
@@ -79,7 +78,7 @@ export class IMP {
     return IamportCapacitor.startIamportActivity(newOptions);
   }
 
-  getPaymentType(data: PaymentData): String {
+  getPaymentType(data: PaymentData): string {
     const { pg, pay_method } = data;
     if (pay_method === 'trans') {
       if (pg!.includes('html5_inicis')) {
