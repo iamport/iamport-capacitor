@@ -25,8 +25,6 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-/* antd */
-import 'antd/dist/antd.less';
 
 const App: React.FC = () => (
   <IonApp>

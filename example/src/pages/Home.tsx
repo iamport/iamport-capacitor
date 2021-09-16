@@ -1,25 +1,25 @@
-import { IonContent, IonPage } from '@ionic/react';
+import { IonContent, IonIcon, IonPage } from '@ionic/react';
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { CreditCardOutlined, UserOutlined } from '@ant-design/icons';
+import { cardOutline, peopleOutline } from 'ionicons/icons';
 
 const Home: React.FC = () => {
   return (
     <IonPage>
-      <IonContent className="ion-padding">
+      <IonContent className='ion-padding'>
         <HomeContainer>
           <BlueBox>
             <h2>아임포트 테스트</h2>
             <p>아임포트 CAPACITOR 모듈 테스트 화면입니다.</p>
             <p>아래 버튼을 눌러 결제 또는 본인인증 테스트를 진행해주세요.</p>
           </BlueBox>
-          <Link to="/payment">
-            <CreditCardOutlined />
+          <Link to='/payment'>
+            <IonIcon icon={cardOutline} size='large' />
             결제하기
           </Link>
-          <Link to="/certification">
-            <UserOutlined />
+          <Link to='/certification'>
+            <IonIcon icon={peopleOutline} size='large' />
             본인인증 하기
           </Link>
         </HomeContainer>
@@ -38,7 +38,7 @@ const HomeContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
   a {
     z-index: 2;
     display: flex;
@@ -53,7 +53,8 @@ const HomeContainer = styled.div`
     height: 100px;
     border-radius: 3px;
     margin: 0 0.5rem;
-    .anticon {
+
+    .icon {
       font-size: 1.4rem;
       margin-bottom: 0.5rem;
     }

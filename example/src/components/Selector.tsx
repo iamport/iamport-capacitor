@@ -1,37 +1,32 @@
 import React, { forwardRef } from 'react';
-import { CaretDownOutlined } from '@ant-design/icons';
-import { Select } from 'antd';
-
-const { Option } = Select;
-
+import { IonSelect, IonSelectOption } from '@ionic/react';
 
 interface eachData {
   label: string;
   value: string | number;
 }
+
 interface SelectorProps {
- data: Array<eachData>;
- value: string | number;
- initialValue: string | number;
- onChange?: any;
+  data: Array<eachData>;
+  value: string | number;
+  onChange?: (e: any) => void;
 }
-const Selector = forwardRef((props: SelectorProps, ref: any ) => {
-  const { data, value, initialValue, onChange } = props;
+
+const Selector = forwardRef((props: SelectorProps, ref: any) => {
+  const { data, value, onChange } = props;
   return (
-    <Select
+    <IonSelect
       ref={ref}
-      size="large"
-      defaultValue={initialValue}
       value={value}
-      onChange={onChange}
+      onIonChange={onChange}
     >
       {
-      data.map((eachData: eachData) => {
-        const { label, value } = eachData;
-        return <Option value={value} key={value}>{label}</Option>;
-      })
+        data.map((eachData: eachData) => {
+          const { label, value } = eachData;
+          return <IonSelectOption value={value} key={value}>{label}</IonSelectOption>;
+        })
       }
-    </Select>
+    </IonSelect>
   );
 });
 

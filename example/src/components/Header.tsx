@@ -1,23 +1,25 @@
 import React from 'react';
-import { IonHeader, IonTitle, IonToolbar, IonBackButton, IonButtons } from '@ionic/react';
+import { IonBackButton, IonButtons, IonHeader, IonTitle, IonToolbar } from '@ionic/react';
+import { chevronBack } from 'ionicons/icons';
 
 interface HeaderProps {
   title: string,
 };
+
 function Header({ title }: HeaderProps) {
   return (
     <IonHeader>
       <IonToolbar
-        color="primary"
+        color='primary'
         style={{
           '--padding-top': '20px',
           '--padding-bottom': '20px',
         }}
       >
-        <IonButtons slot="start">
-          <IonBackButton defaultHref="/" text="" />
+        <IonButtons slot='start'>
+          <IonBackButton defaultHref='/' icon={chevronBack} />
         </IonButtons>
-        <IonTitle>{title}</IonTitle>
+        <IonTitle className={'ion-text-center'}>{title}</IonTitle>
       </IonToolbar>
     </IonHeader>
   );

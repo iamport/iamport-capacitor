@@ -1,8 +1,6 @@
 import styled from 'styled-components';
-import { Form } from '@ant-design/compatible';
-import '@ant-design/compatible/assets/index.css';
 
-const FormContainer = styled(Form)`
+const FormContainer = styled.div`
   border-radius: 3px;
   background-color: #fff;
   &&& {
