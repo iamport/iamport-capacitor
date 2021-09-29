@@ -6,9 +6,6 @@ import { alertCircleOutline, arrowBackOutline, checkmarkCircleOutline } from 'io
 
 const Result: React.FC = ({ history }: any) => {
 
-  console.log('헬로헬로 Result gggg');
-  console.log(history.location);
-
   // const { location } = history;
   // const { state } = location;
   // const { response } = state;
@@ -16,7 +13,6 @@ const Result: React.FC = ({ history }: any) => {
 
   if (response1) {
 
-    console.log('response 가 있어');
     console.log(history.location.state);
 
     const { location } = history;

@@ -11,9 +11,6 @@ import Header from '../components/Header';
 
 const Payment: React.FC = ({ history }: any) => {
 
-    console.log('헬로헬로 Payment');
-    console.log(history.location);
-
     const [pg, setPg] = useState<Pg>('html5_inicis');
     const [payMethod, setPayMethod] = useState<PayMethod>('card');
     const [cardQuota, setCardQuota] = useState(0);
@@ -34,8 +31,6 @@ const Payment: React.FC = ({ history }: any) => {
         type: 'payment',
       };
 
-
-      console.log('콜백 다시 불리는거 아니지?');
       history.replace('/result', { response: newResponse });
     }
 

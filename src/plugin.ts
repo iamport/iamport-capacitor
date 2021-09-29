@@ -1,4 +1,5 @@
-import { Device } from '@capacitor/device';
+// import { Device } from '@capacitor/device';
+import { Capacitor } from '@capacitor/core';
 import queryString from 'query-string';
 
 import type {
@@ -10,7 +11,9 @@ import {
   IamportCapacitor
 } from './index'
 
-const REDIRECT_URL = 'http://localhost/iamport';
+// const REDIRECT_URL = 'http://localhost/iamport';
+const REDIRECT_URL = 'http://detectchangingwebview/iamport/capacitor';
+
 
 export class IMP {
   private isCallbackCalled = false;
@@ -20,7 +23,7 @@ export class IMP {
         query.push(key + '=' + response[key]);
       });
 
-      location.href = 'http://localhost/iamport?' + query.join('&');
+      location.href = 'http://detectchangingwebview/iamport/capacitor?' + query.join('&');
     }`;         
 
   addListenerInner(callback: any, callbackOnBack: any, type?: string) {
@@ -28,7 +31,8 @@ export class IMP {
     IamportCapacitor.addListener('IMPOver', async ({ url }: any) => {
 
       if (!this.isCallbackCalled) { // 콜백 중복 호출 방지
-        const { platform } = await Device.getInfo();
+        // const { platform } = await Device.getInfo();
+        const platform = Capacitor.getPlatform();
         if (platform === 'ios' && type === 'inicis') {
           /** 
            * IOS && 이니시스 && 실시간 계좌이체 예외처리

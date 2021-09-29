@@ -25,7 +25,7 @@ export class IamportService {
   private REDIRECT_URL_WEB = `http://localhost:8100/result`;
 
   //android, ios redirect url
-  private REDIRECT_URL_APP = 'http://localhost/iamport';
+  private REDIRECT_URL_APP = 'http://detectchangingwebview/iamport/capacitor';
 
   type: string;
   private triggerCallback: string = `function(response) {
@@ -33,7 +33,7 @@ export class IamportService {
     Object.keys(response).forEach(key => {
       query.push(key + '=' + response[key]);
     });
-    location.href = 'http://localhost/iamport?' + query.join('&');
+    location.href = 'http://detectchangingwebview/iamport/capacitor?' + query.join('&');
   }`;
 
   constructor(private ngZone: NgZone) {
