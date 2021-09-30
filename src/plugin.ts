@@ -92,7 +92,10 @@ export class IMP implements IamportCapacitorPlugin {
     const newOptions = {
       type: 'certification',
       userCode,
-      data,
+      data: {
+        ...data,
+        m_redirect_url: REDIRECT_URL,
+      },
       triggerCallback: this.triggerCallback,
       redirectUrl: REDIRECT_URL,
     };
