@@ -1,9 +1,7 @@
 {
   "name": "iamport-capacitor",
-  "version": "0.0.3",
-  "description": "capacitor3 iamport",
-  "main": "dist/plugin.cjs.js",
-  "module": "dist/esm/index.js",
+  "version": "0.11.1",
+  "description": "Capacitor plugin for Iamport",
   "types": "dist/esm/index.d.ts",
   "unpkg": "dist/plugin.js",
   "files": [
