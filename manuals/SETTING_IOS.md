@@ -30,18 +30,27 @@
   <string>lottesmartpay</string> <!-- 롯데카드-모바일결제 -->
   <string>lotteappcard</string> <!-- 롯데카드-앱카드 -->
   <string>cloudpay</string> <!-- 하나카드-앱카드 -->
-  <string>nhappvardansimclick</string> <!-- 농협카드-앱카드 -->
+  <string>nhappcardansimclick</string> <!-- 농협카드-앱카드 -->
   <string>nonghyupcardansimclick</string> <!-- 농협카드-공인인증서 -->
   <string>citispay</string> <!-- 씨티카드-앱카드 -->
   <string>citicardappkr</string> <!-- 씨티카드-공인인증서 -->
   <string>citimobileapp</string> <!-- 씨티카드-간편결제 -->
   <string>kakaotalk</string> <!-- 카카오톡 -->
   <string>payco</string> <!-- 페이코 -->
-  <string>lpayapp</string> <!-- 롯데 L페이 -->
+  <string>lpayapp</string> <!-- (구)롯데 L페이 -->
   <string>hanamopmoasign</string> <!-- 하나카드 공인인증앱 -->
-  <string>wooripay</string> <!-- 우리페이 -->
+  <string>wooripay</string> <!-- (구) 우리페이 -->
   <string>nhallonepayansimclick</string> <!-- NH 올원페이 -->
   <string>hanawalletmembers</string> <!-- 하나카드(하나멤버스 월렛) -->
+  <string>chaipayment</string> <!-- 차이 -->
+  <string>kb-auth</string> <!-- 국민 -->
+  <string>hyundaicardappcardid</string>  <!-- 현대카드 -->
+  <string>com.wooricard.wcard</string>  <!-- 우리won페이 -->
+  <string>lmslpay</string>  <!-- 롯데 L페이 -->
+  <string>lguthepay-xpay</string>  <!-- 페이나우 -->
+  <string>liivbank</string>  <!-- Liiv 국민 -->
+  <string>supertoss</string>   <!-- 토스 -->
+  <string>newsmartpib</string>   <!-- 우리WON뱅킹 -->
 </array>
 ```
 

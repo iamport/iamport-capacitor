@@ -13,15 +13,12 @@ const Result: React.FC = ({ history }: any) => {
 
   if (response1) {
 
-    console.log(history.location.state);
-
     const { location } = history;
     const { state } = location;
     const { response } = state;
 
     const { type, error_code, error_msg, merchant_uid, imp_uid, success, imp_success } = response;
 
-    console.log(error_msg);
     const title = type === 'certification' ? '본인인증' : '결제';
     const isSuccess = Object.keys(response).indexOf('imp_success') === -1 ? success === 'true' : imp_success === 'true';
     const color = isSuccess ? '#52c41a' : '#f5222d';
@@ -72,7 +69,6 @@ const Result: React.FC = ({ history }: any) => {
     );
   }
 
-  console.log('끝까지 왔어 ㅋㅋ');
   // console.log(history.location.pathname)
   return <IonPage>
     {/* <Link to={`/${history.location.pathname}`}/> */}
