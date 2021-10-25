@@ -42,7 +42,9 @@ export class IMP {
           const extractedQuery = queryString.extract(decodedUrl);
           const parsedQuery = queryString.parse(extractedQuery);
           const { imp_uid, merchant_uid } = parsedQuery;
+          const success = "true" 
           const query = {
+            success,
             imp_uid,
             merchant_uid:
                 typeof merchant_uid === 'object'

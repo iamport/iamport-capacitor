@@ -16,7 +16,7 @@ const Payment: React.FC = ({ history }: any) => {
     const [cardQuota, setCardQuota] = useState(0);
     const [merchantUid, setMerchantUid] = useState(`mid_${new Date().getTime()}`);
     const [name, setName] = useState('아임포트 결제데이터분석');
-    const [amount, setAmount] = useState('39000');
+    const [amount, setAmount] = useState('1000');
     const [buyerName, setBuyerName] = useState('홍길동');
     const [buyerTel, setBuyerTel] = useState('01012341234');
     const [buyerEmail, setBuyerEmail] = useState('example@example.com');
@@ -90,6 +90,9 @@ const Payment: React.FC = ({ history }: any) => {
           callback,
           callbackOnBack,
         };
+        console.log("== 결제요청 데이터 ==");
+        console.log(data);
+        console.log("=================");
         await imp.payment(options);
       } catch (e) {
         console.log(e);
@@ -167,14 +170,14 @@ const Payment: React.FC = ({ history }: any) => {
                 <IonLabel>
                   실물 컨텐츠
                 </IonLabel>
-                <IonToggle checked={true} onIonChange={(e: any) => setDigital(e.target.value)} />
+                <IonToggle checked={digital} onIonChange={(e) => setDigital(e.detail.checked)} />
               </IonItem>
             )}
             <IonItem>
               <IonLabel>
                 에스크로
               </IonLabel>
-              <IonToggle checked={true} onIonChange={(e: any) => setEscrow(e.target.value)} />
+              <IonToggle checked={escrow} onIonChange={(e) => setEscrow(e.detail.checked)} />
             </IonItem>
             <IonItem>
               <IonLabel>

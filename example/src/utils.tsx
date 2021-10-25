@@ -90,6 +90,6 @@ export function getUserCode(pg: Pg): string {
     case 'naverpay':
       return 'imp41073887';
     default:
-      return 'imp19424728';
+      return 'iamport';
   }
 }

@@ -26,7 +26,7 @@ export default class Utils {
       case 'naverpay':
         return 'imp41073887';
       default:
-        return 'imp19424728';
+        return 'iamport';
     }
   }
 

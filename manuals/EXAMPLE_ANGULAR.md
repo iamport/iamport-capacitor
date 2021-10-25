@@ -41,7 +41,7 @@ export class PaymentPage {
       pay_method: payMethod,                        // 결제수단
       name: '아임포트 결제데이터 분석',                   // 주문명
       merchant_uid: `mid_${new Date().getTime()}`,  // 주문번호
-      amount: '39000',                              // [필수입력] 결제금액
+      amount: '1000',                              // [필수입력] 결제금액
       buyer_name: '홍길동',                           // 구매자 이름
       buyer_tel: '01012345678',                     // 구매자 연락처
       buyer_email: 'example@naver.com',             // 구매자 이메일
