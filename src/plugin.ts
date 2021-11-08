@@ -1,32 +1,38 @@
-import { Plugins } from '@capacitor/core';
+// import { Device } from '@capacitor/device';
+import { Capacitor } from '@capacitor/core';
 import queryString from 'query-string';
-import {
-  IamportCapacitorPlugin,
-  PaymentOptions,
+
+import type {
   PaymentData,
+  PaymentOptions,
   CertificationOptions,
 } from './definitions';
+import {
+  IamportCapacitor
+} from './index'
 
-const { IamportCapacitor, Device } = Plugins;
+// const REDIRECT_URL = 'http://localhost/iamport';
+const REDIRECT_URL = 'http://detectchangingwebview/iamport/capacitor';
 
-const REDIRECT_URL = 'http://localhost/iamport';
 
-export class IMP implements IamportCapacitorPlugin {
-  private isCallbackCalled: boolean = false;       
-  private triggerCallback: string = `function(response) {
+export class IMP {
+  private isCallbackCalled = false;
+  private triggerCallback = `function(response) {
       const query = [];
       Object.keys(response).forEach(key => {
         query.push(key + '=' + response[key]);
       });
 
-      location.href = 'http://localhost/iamport?' + query.join('&');
+      location.href = 'http://detectchangingwebview/iamport/capacitor?' + query.join('&');
     }`;         
 
-  addListener(callback: any, callbackOnBack: any, type?: String) {
+  addListenerInner(callback: any, callbackOnBack: any, type?: string) {
+
     IamportCapacitor.addListener('IMPOver', async ({ url }: any) => {
 
       if (!this.isCallbackCalled) { // 콜백 중복 호출 방지
-        const { platform } = await Device.getInfo();
+        // const { platform } = await Device.getInfo();
+        const platform = Capacitor.getPlatform();
         if (platform === 'ios' && type === 'inicis') {
           /** 
            * IOS && 이니시스 && 실시간 계좌이체 예외처리
@@ -36,9 +42,14 @@ export class IMP implements IamportCapacitorPlugin {
           const extractedQuery = queryString.extract(decodedUrl);
           const parsedQuery = queryString.parse(extractedQuery);
           const { imp_uid, merchant_uid } = parsedQuery;
+          const success = "true" 
           const query = {
+            success,
             imp_uid,
-            merchant_uid: typeof merchant_uid === 'object' ? merchant_uid[0] : merchant_uid,
+            merchant_uid:
+                typeof merchant_uid === 'object'
+                  ? merchant_uid?.[0]
+                  : merchant_uid,
           };
           callback(query);
         } else {
@@ -69,17 +80,17 @@ export class IMP implements IamportCapacitorPlugin {
       triggerCallback: this.triggerCallback,
       redirectUrl: REDIRECT_URL,
     };
-    this.addListener(callback, callbackOnBack, type);
+    this.addListenerInner(callback, callbackOnBack, type);
     return IamportCapacitor.startIamportActivity(newOptions);
   }
 
-  getPaymentType(data: PaymentData): String {
+  getPaymentType(data: PaymentData): string {
     const { pg, pay_method } = data;
     if (pay_method === 'trans') {
-      if (pg.includes('html5_inicis')) {
+      if (pg!.includes('html5_inicis')) {
         return 'inicis';
       }
-      if (pg.includes('nice')) {
+      if (pg!.includes('nice')) {
         return 'nice';
       }
     }
@@ -99,7 +110,7 @@ export class IMP implements IamportCapacitorPlugin {
       triggerCallback: this.triggerCallback,
       redirectUrl: REDIRECT_URL,
     };
-    this.addListener(callback, callbackOnBack);
+    this.addListenerInner(callback, callbackOnBack);
 
     return IamportCapacitor.startIamportActivity(newOptions);
   }

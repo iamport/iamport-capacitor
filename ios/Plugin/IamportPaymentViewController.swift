@@ -82,6 +82,24 @@ class IamportPaymentViewController: IamportViewController {
             return "https://itunes.apple.com/kr/app/id1038288833";
         case "shinsegaeeasypayment": // 신세계 SSGPAY
             return "https://itunes.apple.com/app/id666237916";
+        case "chaipayment":
+            return "https://itunes.apple.com/app/id1459979272";
+        case "kb-auth":
+            return "https://itunes.apple.com/app/id695436326";
+        case "hyundaicardappcardid":
+            return "https://itunes.apple.com/app/id702653088";
+        case "lmslpay":
+            return "https://itunes.apple.com/app/id473250588";
+        case "com.wooricard.wcard":
+            return "https://itunes.apple.com/app/id1499598869";
+        case "lguthepay-xpay":
+            return "https://itunes.apple.com/app/id760098906";
+        case "liivbank":
+            return "https://itunes.apple.com/app/id1126232922";
+        case "supertoss":
+            return "https://itunes.apple.com/app/id839333328";
+        case "newsmartpib":
+            return "https://itunes.apple.com/app/id1470181651";
         default:
             return url;
         }

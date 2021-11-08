@@ -36,7 +36,7 @@ class IamportViewController: UIViewController, WKUIDelegate, WKNavigationDelegat
             self.appScheme = appScheme as! String
         }
         self.triggerCallback = call.getString("triggerCallback") ?? ""
-        self.redirectUrl = call.getString("redirectUrl") ?? "http://localhost/iamport"
+        self.redirectUrl = call.getString("redirectUrl") ?? "http://detectchangingwebview/iamport/capacitor"
     }
     
     override func loadView() {

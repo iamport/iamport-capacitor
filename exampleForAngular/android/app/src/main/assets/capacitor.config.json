@@ -1,8 +1,8 @@
 {
-  "appId": "kr.iamport.example.angular",
-  "appName": "exampleForAngular",
-  "bundledWebRuntime": false,
-  "npmClient": "yarn",
-  "webDir": "www",
-  "cordova": {}
+	"appId": "kr.iamport.example.angular",
+	"appName": "exampleForAngular",
+	"bundledWebRuntime": false,
+	"npmClient": "yarn",
+	"webDir": "www",
+	"cordova": {}
 }

@@ -10,12 +10,12 @@ import {
   METHOD_FOR_PHONE,
   METHOD_FOR_VBANK,
   eachMethod,
-  eachQuota
+  eachQuota,
 } from './constants';
 
 export default class Utils {
   static getUserCode(pg: Pg): string {
-    switch(pg) {
+    switch (pg) {
       case 'kakao':
         return 'imp10391932';
       case 'paypal':
@@ -26,12 +26,12 @@ export default class Utils {
       case 'naverpay':
         return 'imp41073887';
       default:
-        return 'imp19424728';
+        return 'iamport';
     }
   }
 
   static getMethods(pg: Pg): Array<eachMethod> {
-    switch(pg) {
+    switch (pg) {
       case 'html5_inicis': {
         return METHODS_FOR_INICIS;
       }
@@ -42,7 +42,7 @@ export default class Utils {
       case 'kakaopay':
       case 'kakao':
       case 'paypal':
-      case 'payco': 
+      case 'payco':
       case 'smilepay': {
         return METHOD_FOR_CARD;
       }

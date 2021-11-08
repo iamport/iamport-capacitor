@@ -1,224 +1,253 @@
-import { IonContent, IonPage } from '@ionic/react';
+import { IonButton, IonContent, IonInput, IonItem, IonLabel, IonPage, IonToggle } from '@ionic/react';
 import React, { useState } from 'react';
-import { Form, Input, Button, Switch } from 'antd';
-import { IMP, PaymentData, PaymentOptions, Response, Pg, PayMethod } from 'iamport-capacitor';
+import { IMP, PaymentData, PaymentOptions, PayMethod, Pg, Response } from 'iamport-capacitor';
 
-import Header from '../components/Header';
-import FormContainer from '../components/FormContainer';
 import Selector from '../components/Selector';
 
 import { PGS } from '../constants';
 
-import { getUserCode, getQuotas, getMethods } from '../utils';
+import { getMethods, getQuotas, getUserCode } from '../utils';
+import Header from '../components/Header';
 
-const  { Item } = Form;
+const Payment: React.FC = ({ history }: any) => {
 
-const initialPg: Pg = 'html5_inicis';
-const initialMethod: PayMethod = 'card';
-const initialQuota = 0;
+    const [pg, setPg] = useState<Pg>('html5_inicis');
+    const [payMethod, setPayMethod] = useState<PayMethod>('card');
+    const [cardQuota, setCardQuota] = useState(0);
+    const [merchantUid, setMerchantUid] = useState(`mid_${new Date().getTime()}`);
+    const [name, setName] = useState('아임포트 결제데이터분석');
+    const [amount, setAmount] = useState('1000');
+    const [buyerName, setBuyerName] = useState('홍길동');
+    const [buyerTel, setBuyerTel] = useState('01012341234');
+    const [buyerEmail, setBuyerEmail] = useState('example@example.com');
+    const [vbankDue, setVbankDue] = useState('');
+    const [bizNum, setBizNum] = useState('');
+    const [escrow, setEscrow] = useState(false);
+    const [digital, setDigital] = useState(false);
 
-const Payment: React.FC = ({ history, form }: any) => {
-	const initialMerchantUid = `mid_${new Date().getTime()}`;
-	const { getFieldDecorator, validateFieldsAndScroll } = form;
+    function callback(response: Response) {
+      const newResponse = {
+        ...response,
+        type: 'payment',
+      };
 
-	const [pg, setPg] = useState<Pg>(initialPg);
-	const [quota, setQuota] = useState(initialQuota);
-	const [pay_method, setPayMethod] = useState<PayMethod>(initialMethod);
+      history.replace('/result', { response: newResponse });
+    }
 
-	function callback(response: Response) {
-		const newResponse = {
-			...response,
-			type: 'payment',
-		};
+    function callbackOnBack() {
 
-		history.replace('/result', { response: newResponse });
-  }
-  
-  function callbackOnBack() {
-    history.replace('/');
-  }
-	
-	function handleSubmit(e: any) {
-		e.preventDefault();
+      console.log('callbackOnBack');
+      history.replace('/');
+    }
 
-		validateFieldsAndScroll((error: any, values: any) => {
-			if (!error) {
-				const {
-					merchant_uid,
-					name,
-					amount,
-					buyer_name,
-					buyer_tel,
-					buyer_email,
-					escrow,
-					vbank_due,
-					biz_num,
-					digital,
-				} = values;
+    const handleSubmit = async () => {
 
-				const imp = new IMP();
-				const userCode = getUserCode(pg);
-				const data: PaymentData = {
-					pg,
-					pay_method,
-					merchant_uid,
-					name,
-					amount,
-					buyer_name,
-					buyer_tel,
-					buyer_email,
-					escrow,
-					app_scheme: 'io.ionic.starter',
-				};
-				// 신용카드의 경우, 할부기한 추가
-				if (pay_method === 'card' && quota !== 0) {
-					data.display = {
-						card_quota: quota === 1 ? [] : [quota],
-					};
-				}
+      try {
+        const imp = new IMP();
+        const userCode = getUserCode(pg);
+        const data: PaymentData = {
+          pg: pg,
+          pay_method: payMethod,
+          merchant_uid: merchantUid,
+          name: name,
+          amount: amount,
+          buyer_name: buyerName,
+          buyer_tel: buyerTel,
+          buyer_email: buyerEmail,
+          escrow: escrow,
+          app_scheme: 'io.ionic.starter',
+        };
+        // 신용카드의 경우, 할부기한 추가
+        if (payMethod === 'card' && cardQuota !== 0) {
+          data.display = {
+            card_quota: cardQuota === 1 ? [] : [cardQuota],
+          };
+        }
 
-				// 가상계좌의 경우, 입금기한 추가
-				if (pay_method === 'vbank' && vbank_due.length !== 0) {
-					data.vbank_due = vbank_due;
-				}
+        // 가상계좌의 경우, 입금기한 추가
+        if (payMethod === 'vbank' && vbankDue.length !== 0) {
+          data.vbank_due = vbankDue;
+        }
 
-				// 다날 && 가상계좌의 경우, 사업자 등록번호 10자리 추가
-				if (pay_method === 'vbank' && pg === 'danal_tpay') {
-					data.biz_num = biz_num;
-				}
+        // 다날 && 가상계좌의 경우, 사업자 등록번호 10자리 추가
+        if (payMethod === 'vbank' && pg === 'danal_tpay') {
+          data.biz_num = bizNum;
+        }
 
-				// 휴대폰 소액결제의 경우, 실물 컨텐츠 여부 추가
-				if (pay_method === 'phone') {
-					data.digital = digital;
-				}
+        // 휴대폰 소액결제의 경우, 실물 컨텐츠 여부 추가
+        if (payMethod === 'phone') {
+          data.digital = digital;
+        }
 
-				// 정기결제의 경우, customer_uid 추가
-				if (pg === 'kcp_billing') {
-					data.customer_uid = `cuid_${new Date().getTime()}`;
-				}
+        // 정기결제의 경우, customer_uid 추가
+        if (pg === 'kcp_billing') {
+          data.customer_uid = `cuid_${new Date().getTime()}`;
+        }
 
-				const options: PaymentOptions = {
-					userCode,
-					data,
+        const options: PaymentOptions = {
+          userCode,
+          data,
           callback,
           callbackOnBack,
-				};
-				imp.payment(options);
-			}
-		});
-	}
-	
-	return (
-		<IonPage>
-			<Header title="결제 테스트" />
-			<IonContent className="ion-padding">
-				<FormContainer onSubmit={handleSubmit}>
-					<Item label="PG사">
-						<Selector
-							data={PGS}
-							value={pg}
-							initialValue={initialPg}
-							onChange={(value: Pg) => {
-								setPg(value);
+        };
+        console.log("== 결제요청 데이터 ==");
+        console.log(data);
+        console.log("=================");
+        await imp.payment(options);
+      } catch (e) {
+        console.log(e);
+      }
+    };
 
-								const methods = getMethods(value);
-								setPayMethod(methods[0].value);
 
-								const quotas = getQuotas(value);
-								setQuota(quotas[0].value);
-							}}
-						/>
-					</Item>
-					<Item label="결제수단">
-						<Selector
-							data={getMethods(pg)}
-							value={pay_method}
-							initialValue={initialMethod}
-							onChange={(value: PayMethod) => setPayMethod(value)}
-						/>
-					</Item>
-					{pay_method === 'card' && (
-						<Item label="할부개월수">
-							<Selector
-								data={getQuotas(pg)}
-								value={quota}
-								initialValue={initialQuota}
-								onChange={(value: number) => setQuota(value)}
-							/>
-						</Item>
-					)}
-					{pay_method === 'vbank' && (
-						<Item label="입금기한">
-							{getFieldDecorator('vbank_due')(<Input size="large" type="number" />)}
-						</Item>  
-					)}
-					{pay_method === 'vbank' && pg === 'danal_tpay' && (
-						<Item label="사업자번호">
-							{getFieldDecorator('biz_num')(<Input size="large" type="number" />)}
-						</Item>  
-					)}
-					{pay_method === 'phone' && (
-						<Item label="실물 컨텐츠">
-							{getFieldDecorator('digital', { valuePropName: 'checked' })(<Switch />)}
-						</Item>
-					)}
-					<Item label="에스크로">
-						{getFieldDecorator('escrow', { valuePropName: 'checked' })(<Switch />)}
-					</Item>
-					<Item label="주문명">
-						{getFieldDecorator('name', {
-							initialValue: '아임포트 결제데이터 분석',
-							rules: [
-								{
-									required: true,
-									message: '주문명은 필수입력입니다.',
-								},
-							],
-						})(<Input size="large" />)}
-					</Item>
-					<Item label="결제금액">
-						{getFieldDecorator('amount', {
-							initialValue: '1000',
-							rules: [
-								{
-									required: true,
-									message: '결제금액은 필수입력입니다.',
-								},
-							],
-						})(<Input size="large" type="number" />)}
-					</Item>
-					<Item label="주문번호">
-						{getFieldDecorator('merchant_uid', {
-							rules: [
-								{
-									required: true,
-									message: '주문번호는 필수입력입니다.',
-								},
-							],
-							initialValue: initialMerchantUid,
-						})(<Input size="large" />)}
-					</Item>
-					<Item label="이름">
-						{getFieldDecorator('buyer_name', {
-							initialValue: '홍길동',
-						})(<Input size="large" />)}
-					</Item>
-					<Item label="전화번호">
-						{getFieldDecorator('buyer_phone', {
-							initialValue: '01012341234',
-						})(<Input size="large" type="number" />)}
-					</Item>
-					<Item label="이메일">
-						{getFieldDecorator('buyer_email', {
-							initialValue: 'example@example.com',
-						})(<Input size="large" />)}
-					</Item>
-					<Button type="primary" size="large" htmlType="submit">결제하기</Button>
-				</FormContainer>
-			</IonContent>
-		</IonPage>
-	);
-};
+    return (
+      <IonPage>
+        <Header title='결제 테스트' />
+        <IonContent className='ion-padding'>
+          <form onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit();
+          }}>
+            <IonItem>
+              <IonLabel>
+                PG사
+              </IonLabel>
+              <Selector
+                data={PGS}
+                value={pg}
+                onChange={(e) => {
+                  console.log(e.target);
+                  setPg(e.target.value);
 
-export default Form.create()(Payment);
+                  const methods = getMethods(e.target.value);
+                  setPayMethod(methods[0].value);
+
+                  const quotas = getQuotas(e.target.value);
+                  setCardQuota(quotas[0].value);
+                }}
+              />
+            </IonItem>
+            <IonItem>
+              <IonLabel>
+                결제수단
+              </IonLabel>
+              <Selector
+                data={getMethods(pg)}
+                value={payMethod}
+                onChange={(e) => setPayMethod(e.target.value)}
+              />
+            </IonItem>
+            {payMethod === 'card' && (
+              <IonItem>
+                <IonLabel>
+                  할부개월수
+                </IonLabel>
+                <Selector
+                  data={getQuotas(pg)}
+                  value={cardQuota}
+                  onChange={(e) => setCardQuota(e.target.value)}
+                />
+              </IonItem>
+            )}
+            {payMethod === 'vbank' && (
+              <IonItem>
+                <IonLabel>
+                  입금기한
+                </IonLabel>
+                <IonInput type={'number'} onIonChange={(e: any) => setVbankDue(e.target.value)} />
+              </IonItem>
+            )}
+            {payMethod === 'vbank' && pg === 'danal_tpay' && (
+              <IonItem>
+                <IonLabel>
+                  사업자번호
+                </IonLabel>
+                <IonInput type={'number'} onIonChange={(e: any) => setBizNum(e.target.value)} />
+              </IonItem>
+            )}
+            {payMethod === 'phone' && (
+              <IonItem>
+                <IonLabel>
+                  실물 컨텐츠
+                </IonLabel>
+                <IonToggle checked={digital} onIonChange={(e) => setDigital(e.detail.checked)} />
+              </IonItem>
+            )}
+            <IonItem>
+              <IonLabel>
+                에스크로
+              </IonLabel>
+              <IonToggle checked={escrow} onIonChange={(e) => setEscrow(e.detail.checked)} />
+            </IonItem>
+            <IonItem>
+              <IonLabel>
+                주문명
+              </IonLabel>
+              <IonInput
+                placeholder={'주문명은 필수입력입니다.'}
+                value={name}
+                required={true}
+                onIonChange={(e: any) => setName(e.target.value)}
+              />
+            </IonItem>
+            <IonItem>
+              <IonLabel>
+                결제금액
+              </IonLabel>
+              <IonInput
+                placeholder={'결제금액은 필수입력입니다.'}
+                value={amount}
+                required={true}
+                type={'number'}
+                onIonChange={(e: any) => setAmount(e.target.value)}
+              />
+            </IonItem>
+            <IonItem>
+              <IonLabel>
+                주문번호
+              </IonLabel>
+              <IonInput
+                placeholder={'주문번호는 필수입력입니다.'}
+                value={merchantUid}
+                required={true}
+                onIonChange={(e: any) => setMerchantUid(e.target.value)}
+              />
+            </IonItem>
+            <IonItem>
+              <IonLabel>
+                이름
+              </IonLabel>
+              <IonInput
+                value={buyerName}
+                onIonChange={(e: any) => setBuyerName(e.target.value)}
+              />
+            </IonItem>
+            <IonItem>
+              <IonLabel>
+                전화번호
+              </IonLabel>
+              <IonInput
+                value={buyerTel}
+                type={'number'}
+                onIonChange={(e: any) => setBuyerTel(e.target.value)}
+              />
+            </IonItem>
+            <IonItem>
+              <IonLabel>
+                이메일
+              </IonLabel>
+              <IonInput
+                value={buyerEmail}
+                onIonChange={(e: any) => setBuyerEmail(e.target.value)}
+              />
+            </IonItem>
+            <IonButton size={'large'} expand={'block'} type={'submit'}>결제하기</IonButton>
+          </form>
+        </IonContent>
+      </IonPage>
+    );
+  }
+;
+
+export default Payment;
   
