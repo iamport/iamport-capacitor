@@ -3,22 +3,13 @@
 아임포트 캐패시터 모듈 안드로이드 설정 안내입니다.
 
 ### 1. 아임포트 모듈 추가하기
-`MainActivity.java` 파일(adnorid/app/src/main/java/[...]에 위치)에 아임포트 캐패시터 모듈을 아래와 같이 추가해주세요.
+capacitor v3 부터는 BridgeActivity를 통해 플러그인 추가 할 필요가 없습니다.
+https://capacitorjs.com/docs/updating/3-0#switch-to-automatic-android-plugin-loading
 
 ```java
-...
 import kr.iamport.capacitor.IamportCapacitor;
 
 public class MainActivity extends BridgeActivity {
-  @Override
-  public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-
-    this.init(savedInstanceState, new ArrayList<Class<? extends Plugin>>() {{
-      ...
-      add(IamportCapacitor.class); // 아임포트 캐패시터 모듈 추가
-    }});
-  }
 }
 ```
 
