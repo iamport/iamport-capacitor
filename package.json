@@ -11,6 +11,7 @@
     "android/build.gradle",
     "dist/",
     "ios/Plugin/",
+    "ios/Resources/",
     "IamportCapacitor.podspec"
   ],
   "author": {
