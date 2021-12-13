@@ -2,7 +2,10 @@
 
 아임포트 캐패시터 모듈 버전 정보 안내입니다.
 
-- [v1.0.0](https://github.com/iamport/iamport-capacitor/tree/master)
+- [v1.0.1](https://github.com/iamport/iamport-capacitor/tree/master)
+  - iOS Resource 경로를 참조하지 못하는 부분을 해결하였습니다.
+
+- [v1.0.0](https://github.com/iamport/iamport-capacitor/tree/v1.0.0)
   - Capacitor V3 를 지원합니다.
 
 - [v0.11.1](https://github.com/iamport/iamport-capacitor/tree/v0.11.1)
