@@ -2,7 +2,10 @@
 
 아임포트 캐패시터 모듈 버전 정보 안내입니다.
 
-- [v1.0.1](https://github.com/iamport/iamport-capacitor/tree/master)
+- [v1.0.1-hotfix01](https://github.com/iamport/iamport-capacitor/tree/master)
+  - plugin 에서 결과 파싱에 필요한 query-string 라이브러리를 peerDependencies 에 추가하였습니다
+
+- [v1.0.1](https://github.com/iamport/iamport-capacitor/tree/v1.0.1)
   - iOS Resource 경로를 참조하지 못하는 부분을 해결하였습니다.
 
 - [v1.0.0](https://github.com/iamport/iamport-capacitor/tree/v1.0.0)
