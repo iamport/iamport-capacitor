@@ -20,6 +20,7 @@ class IamportViewController: UIViewController, WKUIDelegate, WKNavigationDelegat
     var triggerCallback: String = ""
     var redirectUrl: String!
     var loadingFinished: Bool = false
+    var isFinished: Bool = false
     
     convenience init(call: CAPPluginCall) {
         self.init()
@@ -57,18 +58,23 @@ class IamportViewController: UIViewController, WKUIDelegate, WKNavigationDelegat
             webView.load(myRequest)
         }
     }
-    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if self.isFinished == false {
+           delegate?.onBack()
+        }
+
+    }
     @available (iOS 8.0, *)
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         let navigationUrl = navigationAction.request.url!
         let url = navigationUrl.absoluteString;
-        print(url);
         if (self.isOver(url: url)) {
+            self.isFinished = true
             self.webView.stopLoading()
             self.webView.removeFromSuperview()
             self.webView.navigationDelegate = nil
             self.webView = nil
-            
             self.dismiss(animated: true)
             delegate?.onOver(type: url)
             
