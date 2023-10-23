@@ -1,8 +1,10 @@
 {
 	"appId": "io.ionic.starter",
 	"appName": "example",
-	"bundledWebRuntime": false,
 	"npmClient": "npm",
 	"webDir": "build",
-	"cordova": {}
+	"cordova": {},
+	"server": {
+		"androidScheme": "https"
+	}
 }
