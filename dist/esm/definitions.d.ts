@@ -1,7 +1,7 @@
 import type { PluginListenerHandle } from '@capacitor/core';
 export interface IamportCapacitorPlugin {
     startIamportActivity(options: any): Promise<any>;
-    addListener(name: string, callback: any): Promise<PluginListenerHandle> & PluginListenerHandle;
+    addListener(name: string, callback: any): Promise<PluginListenerHandle>;
     removeAllListeners(): Promise<void>;
 }
 export type Pg = 'html5_inicis' | 'kcp' | 'kcp_billing' | 'uplus' | 'jtnet' | 'nice' | 'kakaopay' | 'kakao' | 'danal' | 'danal_tpay' | 'kicc' | 'paypal' | 'mobilians' | 'payco' | 'settle' | 'naverco' | 'naverpay' | 'smilepay';

@@ -23,7 +23,7 @@
       },
       {
         "name": "addListener",
-        "signature": "(name: string, callback: any) => Promise<PluginListenerHandle> & PluginListenerHandle",
+        "signature": "(name: string, callback: any) => Promise<PluginListenerHandle>",
         "parameters": [
           {
             "name": "name",
@@ -36,13 +36,13 @@
             "type": "any"
           }
         ],
-        "returns": "Promise<PluginListenerHandle> & PluginListenerHandle",
+        "returns": "Promise<PluginListenerHandle>",
         "tags": [],
         "docs": "",
         "complexTypes": [
           "PluginListenerHandle"
         ],
-        "slug": "addlistenerstring"
+        "slug": "addlistenerstring-"
       },
       {
         "name": "removeAllListeners",

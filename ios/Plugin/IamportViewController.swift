@@ -25,7 +25,7 @@ class IamportViewController: UIViewController, WKUIDelegate, WKNavigationDelegat
     convenience init(call: CAPPluginCall) {
         self.init()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.onDidReceiveData(_:)), name: Notification.Name(CAPNotifications.URLOpen.name()), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onDidReceiveData(_:)), name: Notification.Name.capacitorOpenURL, object: nil)
         
         self.userCode = call.getString("userCode") ?? "iamport"
 
@@ -46,8 +46,20 @@ class IamportViewController: UIViewController, WKUIDelegate, WKNavigationDelegat
         webView.uiDelegate = self
         webView.navigationDelegate = self
         view = webView
+
+        // 스와이프 다운 제스처 추가
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
+        webView.addGestureRecognizer(panGesture)
     }
-    
+    @objc func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
+        if gesture.state == .ended {
+            let velocity = gesture.velocity(in: webView)
+            if velocity.y > 1000 { // 스와이프 다운 감지 임계값
+                self.dismiss(animated: true) // 모달 닫기
+                delegate?.onBack() // onBack() 함수 호출
+            }
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         

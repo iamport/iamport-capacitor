@@ -1,6 +1,6 @@
 {
   "name": "iamport-capacitor",
-  "version": "1.0.1-hotfix01",
+  "version": "2.0.1",
   "description": "Capacitor plugin for Iamport",
   "types": "dist/esm/index.d.ts",
   "main": "dist/plugin.cjs.js",
@@ -49,11 +49,11 @@
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
-    "@capacitor/android": "^5.0.0",
-    "@capacitor/core": "^5.0.0",
-    "@capacitor/device": "^5.0.2",
-    "@capacitor/docgen": "^0.2.1",
-    "@capacitor/ios": "^5.0.0",
+    "@capacitor/android": "^6.0.0",
+    "@capacitor/core": "^6.0.0",
+    "@capacitor/device": "^6.0.0",
+    "@capacitor/docgen": "^0.2.2",
+    "@capacitor/ios": "^6.0.0",
     "@ionic/eslint-config": "^0.3.0",
     "@ionic/prettier-config": "^3.0.0",
     "@ionic/swiftlint-config": "^1.1.2",
@@ -70,7 +70,7 @@
     "typescript": "^5.0.4"
   },
   "peerDependencies": {
-    "@capacitor/core": "^5.0.0",
+    "@capacitor/core": "^6.0.0",
     "query-string": "^8.1.0"
   },
   "prettier": "@ionic/prettier-config",
