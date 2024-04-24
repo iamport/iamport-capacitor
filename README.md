@@ -6,7 +6,7 @@
 아임포트 캐패시터 모듈입니다.
 
 ## 버전정보
-최신버전은 [v1.0.1-hotfix01](https://github.com/iamport/iamport-capacitor/tree/master)입니다. 버전 히스토리는 [버전정보](manuals/VERSION.md)를 참고하세요.
+해당 플러그인은 capacitor v6에 맞춰져 있습니다.
 
 ## 지원정보
 

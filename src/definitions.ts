@@ -7,7 +7,7 @@ export interface IamportCapacitorPlugin {
   addListener(
     name: string,
     callback: any,
-  ): Promise<PluginListenerHandle> & PluginListenerHandle;
+  ): Promise<PluginListenerHandle>;
   //native app only
   removeAllListeners(): Promise<void>;
 }

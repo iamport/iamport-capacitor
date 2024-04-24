@@ -20,11 +20,12 @@ class IamportViewController: UIViewController, WKUIDelegate, WKNavigationDelegat
     var triggerCallback: String = ""
     var redirectUrl: String!
     var loadingFinished: Bool = false
+    var isFinished: Bool = false
     
     convenience init(call: CAPPluginCall) {
         self.init()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.onDidReceiveData(_:)), name: Notification.Name(CAPNotifications.URLOpen.name()), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onDidReceiveData(_:)), name: Notification.Name.capacitorOpenURL, object: nil)
         
         self.userCode = call.getString("userCode") ?? "iamport"
 
@@ -45,8 +46,20 @@ class IamportViewController: UIViewController, WKUIDelegate, WKNavigationDelegat
         webView.uiDelegate = self
         webView.navigationDelegate = self
         view = webView
+
+        // 스와이프 다운 제스처 추가
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
+        webView.addGestureRecognizer(panGesture)
     }
-    
+    @objc func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
+        if gesture.state == .ended {
+            let velocity = gesture.velocity(in: webView)
+            if velocity.y > 1000 { // 스와이프 다운 감지 임계값
+                self.dismiss(animated: true) // 모달 닫기
+                delegate?.onBack() // onBack() 함수 호출
+            }
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -57,18 +70,23 @@ class IamportViewController: UIViewController, WKUIDelegate, WKNavigationDelegat
             webView.load(myRequest)
         }
     }
-    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if self.isFinished == false {
+           delegate?.onBack()
+        }
+
+    }
     @available (iOS 8.0, *)
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         let navigationUrl = navigationAction.request.url!
         let url = navigationUrl.absoluteString;
-        print(url);
         if (self.isOver(url: url)) {
+            self.isFinished = true
             self.webView.stopLoading()
             self.webView.removeFromSuperview()
             self.webView.navigationDelegate = nil
             self.webView = nil
-            
             self.dismiss(animated: true)
             delegate?.onOver(type: url)
             

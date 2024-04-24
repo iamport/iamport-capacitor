@@ -30,17 +30,22 @@ public class IamportCapacitor: CAPPlugin, IamportDelegate {
         }
     }
     
-    func onOver(type: String)
-    {
-        print(type)
+    func onOver(type: String) {
         let data = [
             "url" : type,
         ]
         self.notifyListeners("IMPOver", data: data)
+    }
+    func onBack() {
+        let data = [
+            "url" : "",
+        ]
+        self.notifyListeners("IMPBack", data: data)
     }
 }
 
 protocol IamportDelegate: AnyObject
 {
     func onOver(type: String)
+    func onBack()
 }
