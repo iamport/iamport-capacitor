@@ -1,8 +1,10 @@
 # 버전정보
 
 아임포트 캐패시터 모듈 버전 정보 안내입니다.
+- [v1.0.2](https://github.com/iamport/iamport-capacitor/tree/main)
+  - 안드로이드 웹뷰에서 cleartext 요청을 허용하도록 수정했습니다.
 
-- [v1.0.1-hotfix01](https://github.com/iamport/iamport-capacitor/tree/master)
+- [v1.0.1-hotfix01](https://github.com/iamport/iamport-capacitor/tree/v1.0.0-hotfix01)
   - plugin 에서 결과 파싱에 필요한 query-string 라이브러리를 peerDependencies 에 추가하였습니다
 
 - [v1.0.1](https://github.com/iamport/iamport-capacitor/tree/v1.0.1)

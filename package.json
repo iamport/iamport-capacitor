@@ -1,6 +1,6 @@
 {
   "name": "iamport-capacitor",
-  "version": "1.0.1-hotfix01",
+  "version": "1.0.2",
   "description": "Capacitor plugin for Iamport",
   "types": "dist/esm/index.d.ts",
   "main": "dist/plugin.cjs.js",
